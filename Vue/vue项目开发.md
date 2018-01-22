@@ -37,7 +37,7 @@ mockServer.js内容
 	    //出生年月
 	    'date': '@date("yyyy-MM-dd")',
 	  }],
-	
+	})
 	// 映射几个接口
 	Mock.mock('/api/goods', {
 	  code: 0,
