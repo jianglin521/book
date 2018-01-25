@@ -1,8 +1,15 @@
+---
+title: mockjs
+date: 2018/1/25 21:22:39 
+tags: vue
+categories: vue
+---
+
 ## mockjs
 ## 安装
 `npm install mockjs --save-dev`
 
-官方网站
+**官方网站**
 [http://mockjs.com/](http://mockjs.com/)
 
 ## 使用

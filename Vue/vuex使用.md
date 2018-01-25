@@ -1,7 +1,14 @@
+---
+title: vuex使用
+date: 2018/1/25 21:22:39 
+tags: vue
+categories: vue
+---
+
 ## vuex
 Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式
 
-官网地址
+**官网地址**
 [https://vuex.vuejs.org/zh-cn/api.html](https://vuex.vuejs.org/zh-cn/api.html)
 
 ## vuex原理

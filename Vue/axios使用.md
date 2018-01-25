@@ -1,8 +1,15 @@
+---
+title: axios使用
+date: 2018/1/25 21:12:10 
+tags: vue
+categories: vue
+---
+
 ## axios使用
 ## 下载
 `npm install axios --save-dev`
 
-官网地址
+**官网地址**
 [https://www.npmjs.com/package/axios](https://www.npmjs.com/package/axios)
 
 ## 使用
