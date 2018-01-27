@@ -1,8 +1,8 @@
 ---
 title: vue2.0
 date: 2017-9-10 15:05:43
-tags: vue
-categories: vue
+tags: Vue
+categories: Vue
 ---
 
 ## Vue2.0

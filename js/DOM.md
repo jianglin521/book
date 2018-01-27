@@ -1,8 +1,8 @@
 ---
 title: DOM
 date: 2017-1-10 14:07:43
-tags: JS
-categories: JS
+tags: js
+categories: js
 ---
 
 # DOM 基础

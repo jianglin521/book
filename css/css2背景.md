@@ -1,8 +1,8 @@
 ---
 title: css2背景
 date: 2017-1-1 14:07:43
-tags: CSS
-categories: CSS
+tags: css
+categories: css
 ---
 ## CSS2 背景
 ##### background-color 设置背景颜色

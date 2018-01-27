@@ -1,8 +1,8 @@
 ---
 title: axios使用
 date: 2018/1/25 21:12:10 
-tags: vue
-categories: vue
+tags: Vue
+categories: Vue
 ---
 
 ## axios使用

@@ -1,8 +1,8 @@
 ---
 title: css2垂直对齐
 date: 2017-1-1 14:07:43
-tags: CSS
-categories: CSS
+tags: css
+categories: css
 ---
 
 ## CSS2 vertical-align 垂直对齐

@@ -1,8 +1,8 @@
 ---
-title: vue重要属性
+title: Vue重要属性
 date: 2017-12-24 10:05:43
-tags: vue
-categories: vue
+tags: Vue
+categories: Vue
 ---
 
 ## 计算属性

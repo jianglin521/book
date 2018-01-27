@@ -1,8 +1,8 @@
 ---
 title: vue源码分析
 date: 2017-9-10 15:05:43
-tags: vue
-categories: vue
+tags: Vue
+categories: Vue
 ---
 
 ### 数据代理(MVVM.js)

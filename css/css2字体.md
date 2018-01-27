@@ -1,8 +1,8 @@
 ---
 title: css2字体
 date: 2017-1-1 14:07:43
-tags: CSS
-categories: CSS
+tags: css
+categories: css
 ---
 ## CSS2 字体样式
 ##### font-family 字体族

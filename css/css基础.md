@@ -1,8 +1,8 @@
 ---
 title: css基础
 date: 2017-1-1 14:07:43
-tags: CSS
-categories: CSS
+tags: css
+categories: css
 ---
 ### 图片格式
 - JPEG

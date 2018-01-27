@@ -1,8 +1,8 @@
 ---
 title: css2文本
 date: 2017-1-1 14:07:43
-tags: CSS
-categories: CSS
+tags: css
+categories: css
 ---
 
 ## CSS2 文本样式

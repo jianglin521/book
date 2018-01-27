@@ -1,8 +1,8 @@
 ---
 title: mockjs
 date: 2018/1/25 21:22:39 
-tags: vue
-categories: vue
+tags: Vue
+categories: Vue
 ---
 
 ## mockjs
