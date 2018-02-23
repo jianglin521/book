@@ -5,7 +5,29 @@ tags: css高级
 categories: css高级
 ---
 
-# CSS3
+## CSS3
+## animation 动画
+实例
+```js
+	//css
+	@keyframes myfirst
+	{
+	0%   {background: red;}
+	50%  {background: blue;}
+	100% {background: green;}
+	}
+	
+	//js
+	$('#footer').click(function(){
+		actionIn("#showdiv",'myfirst',0.5,"");
+	})
+	/*obj,actionName,speed都是 string,time(秒)是int类型*/
+	function actionIn(obj,actionName,time,speed){
+		$(obj).show();
+		$(obj).css({"animation":actionName+" "+time+"s"+" "+speed,"animation-fill-mode":"forwards"});
+	}
+```
+
 #### 目标伪类选择器
 - :target 选取当前活动的目标元素
 - url或者是href带 # (锚名称)指向文档内某个具体的元素。这个被链接的元素就是traget所选取的目标元素
@@ -203,68 +225,6 @@ categories: css高级
 ##### backface-visibility 定义3D元素背面是否可见
 - visible      背面是可见的。
 - hidden     背面是不可见的。
-
-### animation 动画
-##### @keyframes 关键帧
-- @keyframes animationname {keyframes-selector {css-styles;}}
-	- animationname 	   必需。定义动画的名称。 
-	- keyframes-selector  必需。动画时长的百分比。
-	- css-styles 	          必需。一个或多个合法的 CSS 样式属性。
-	
-##### keyframes-selector
-- 0-100%
-- from (与0%相同)
-- to (与100%相同)
-
-##### animation-name  动画名称
-- @keyframes 动画的名称
-- animation-name 属性为 @keyframes关键帧设置的动画规定名称
-
-##### animation-duration  动画执行时间
-- 规定动画完成一个周期所花费的秒或毫秒。默认是 0。  单位time
-- 注意: 始终规定 animation-duration 属性，否则时长为 0，就不会播放动画了。
-
-##### animation-delay  动画延迟时间
-- 规定动画何时开始。. 默认是 0。 单位time
-
-##### animation-timing-function  动画效果
--  规定动画的速度曲线。默认是 "ease"。
-
-##### animation-fill-mode  动画填充
-- 属性规定动画在播放之前或之后，其动画效果是否可见。
-- 可选值:
-	- none 		不改变默认行为。 
-	- backwards      在动画未播放时,显示动画的第一帧
-	- forwards 	动画播放结束时,显示动画的最后一个帧
-	- both 	        播放前和播放后填充模式都被应用
-
-##### animation-iteration-count  动画播放次数
-- 定义动画播放的次数
-- 可选值:
-	- n 定义动画播放次数的数值。默认值是 1 
-	- infinite 规定动画应该无限次播放。 
-
-##### animation-play-state  动画运行状态
-- 规定动画正在运行还是暂停
-- 可选值:
-	- running 规定动画正在播放。 默认值 
-	- paused 规定动画已暂停
-	
-#####  animation-direction  动画播放顺序
-- 是否应该轮流反向播放动画
-- 可选值:
-	- normal 	   默认值。动画正常播放。 
-	- alternate 动画交替反复播放.必须配合播放次数使用,大于1
-	- reverse    动画反向播放 如果反向播放,第一帧是100%{}.最后一帧是0%{}
-	
-##### animation 简写:
-- 可选属性:
-	- animation-name  动画名字
-	- animation-duration  动画执行时间
-	- animation-timing-function  动画执行效果
-	- animation-delay 	动画延迟执行时间
-	- animation-iteration-count 	动画播放次数
-	- animation-direction 	动画播放顺序
 
 ----------
 
