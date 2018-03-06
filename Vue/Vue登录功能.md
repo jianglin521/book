@@ -11,8 +11,8 @@ categories: Vue
 
 ### 首先在用户登录前后分别给出一个状态来标识此用户是否登录（建议用vuex）
 ```js
-	import Vue from ‘vue‘
-	import Vuex from ‘vuex‘
+	import Vue from 'vue'
+	import Vuex from 'vuex'
 	
 	Vue.use(Vuex);
 	
@@ -28,7 +28,7 @@ categories: Vue
 ```
 ###  在用户登录时改变登录状态
 ```js
-  this.$store.commit(‘changeLogin‘,‘100‘)     //登录后改变登录状态 isLogin = 100 ；
+  this.$store.commit('changeLogin','100')     //登录后改变登录状态 isLogin = 100 ；
 ```
 
 ### 重点来了
@@ -36,7 +36,7 @@ categories: Vue
 
 #### 设置需要校验的路由
 ```js
-  { path: ‘/admin‘, 
+  { path: '/admin', 
     component: Admin,
     meta:{auth:true}  // 设置当前路由需要校验   不需要校验的路由就不用写了；不要问为什么，自己去看官网
    }   
@@ -50,7 +50,7 @@ categories: Vue
 	            next()     // 正常跳转到你设置好的页面
 	        }else{
 	            // 未登录则跳转到登陆界面，query:{ Rurl: to.fullPath}表示把当前路由信息传递过去方便登录后跳转回来；
-	　　 　　　　next({path:‘/login‘,query:{ Rurl: to.fullPath} })
+	　　 　　　　next({path:'/login',query:{ Rurl: to.fullPath} })
 	 　　　　　} 
 	　　　　}else{ 
 	　　　　　　next() 
