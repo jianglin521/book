@@ -1,6 +1,6 @@
 ---
 title: axios使用
-date: 2018/3/17 17:54:21 
+date: 2018/3/20 21:42:37 
 tags: Vue
 categories: Vue
 ---
@@ -12,6 +12,24 @@ categories: Vue
 [https://www.npmjs.com/package/axios](https://www.npmjs.com/package/axios)
 
 ## 使用
+### 全局axios默认值
+```js
+	axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
+```
+### 添加自定义token
+```js
+	//请求添加token
+	axios.interceptors.request.use(config => {
+	  let token = store.state.token;
+	  if (token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+	    config.headers.Authorization = token;
+	    //console.log('interceptors config=',config)
+	  }
+	  return config
+	}, error => {
+	  return Promise.reject(error)
+	})
+```
 ### 发送get请求
 ```js
 	// 向具有给定ID的用户发出请求
