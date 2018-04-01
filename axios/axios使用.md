@@ -1,8 +1,8 @@
 ---
 title: axios使用
-date: 2018/3/20 21:42:37 
-tags: Vue
-categories: Vue
+date: 2018/4/1 14:20:48 
+tags: axios
+categories: axios
 ---
 
 ## axios官网
