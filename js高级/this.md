@@ -1,34 +1,160 @@
 ---
 title: this
-date: 2018/1/12 15:06:59 
+date: 2018/4/12 9:43:20 
 tags: js高级
 categories: js高级
 ---
 
-## this
-本质上任何函数在执行时都是通过某个对象调用的
-this就代表调用函数的当前对象
-在定义函数时this没有确定, 只有在执行时才确定.谁调用谁就是this
-当调用函数时没有明确指定当前对象，this就是全局对象window
-通过call和apply去调用一个函数,则call和apply中的第一个参数就是this
-
-## this几种情况
-1.以构造函数形式调用.this就代表即将new出来的对象
-2.以函数的形式调用或在全局环境下 this就是window  fn()
-3.函数作为对象的属性并被调用时. this是调用方法的对象 obj.fn()
-4.使用call和apply调用时,this是第一个参数
-5.回调函数中的this:不是我们指定的
-
-- dom事件回调函数中的this  -- dom元素
-- 定时器回调函数  -- window
-- arr.forEach(function(index,item){})  -- window
-- call和apply 可以让一个函数成为任意指定对象上执行
-- call的参数,列表数据 需要一个一个列出来
-- apply的参数,数组数据 需要封装为一个数组传递 
-	
-例子: 
+## this的指向
+确定`this`指向就是确定函数的执行上下文，也就是“谁调用的它”，有以下几种判断方式：
+### 独立函数调用
 ```js
-	var obj = {};
-	p.setColor.call(obj, "black");
-	//相当于obj.setColor('black)  this就是obj
+	function foo(){
+	    console.log(this.a)
+	}
+	var a = 2
+	foo()  // 2
 ```
+ 这种直接调用的方式**this**指向全局对象，如果是在浏览器就指向**window**
+
+### 对象上下文(隐式绑定)
+```js
+	function foo() { 
+	    console.log( this.a );
+	}
+	var obj = { 
+	    a: 2,
+	    foo: foo
+	};
+	obj.foo(); // 2
+```
+foo虽然被定义在全局作用域，但是调用的时候是通过obj上下文引用的，可以理解为在foo调用的那一刻它被obj对象拥有。所以this指向obj。
+
+这里有两个问题：
+- 链式调用 
+链式调用的情况下只有最后一层才会影响调用位置，例如：
+```js
+	obj1.obj2.obj3.fn() //这里的fn中的this指向ob
+```
+- 引式丢失
+```js
+	function foo() { 
+	    console.log( this.a );
+	}
+	var obj = { 
+	    a: 2,
+	    foo: foo 
+	};
+	var bar = obj.foo; // 函数别名!
+	var a = "xxxxx"
+	bar(); // xxxxx
+```
+这里的bar其实是引用了obj.foo的地址，这个地址指向的是一个函数，也就是说bar的调用其实符合“独立函数调用”规则。所以它的this不是obj。
+
+- 回调函数其实就是隐式丢失
+稍微改一下上面的代码：
+```js
+	function foo() { 
+	    console.log( this.a );
+	}
+	var obj = { 
+	    a: 2,
+	    foo: foo 
+	};
+	var a = "xxxxx"
+	setTimeout( obj.foo ,100); // xxxxx
+```
+我们看到，回调函数虽然是通过obj引用的，但是this也不是obj了。其实内置的setTimeout()函数实现和下面的伪代码类似：
+```js
+	function setTimeout(fn, delay){
+	    //等待delay毫秒
+	    fn()
+	}
+```
+ 其实这段代码隐藏这一个操作就是fn=obj.foo，这和上面例子中的bar=obj.foo异曲同工。
+
+### 显式绑定
+显式绑定的说法是和隐式绑定相对的，指的是通过call、apply、bind显式地更改this指向。
+
+这三个方法第一个参数是this要指向的对象。
+
+注意，如果你给第一个参数传递一个值(字符串、布尔、数字)类型的话，这个值会被转换成对象形式(调用new String(..)、new Boolean(..)、new Number(..))。
+
+这三个方法中的bind方法比较特殊，它可以延迟方法的执行，这可以让我们写出更加灵活的代码。它的原理也很容易模拟：
+```js
+	function foo(something) { 
+	    console.log( this.a, something ); 
+	    return this.a + something;
+	}
+	function bind(fn, obj) {
+	    return function() {
+	        return fn.apply( obj, arguments );
+	    }; 
+	}
+	var obj = { 
+	    a:2
+	};
+	var bar = bind( foo, obj );
+	var b = bar( 3 ); // 2 3 
+	console.log( b ); // 5
+```
+注意：如果第一个参数传入null或者undefined，这个值会被忽略，相当于符合独立函数调用规则
+
+### new绑定
+Js中new与传统的面向类的语言机制不同，Js中的“构造函数”其实和普通函数没有任何区别。
+
+其实当我们使用new来调用函数的时候，发生了下列事情：
+- 创建一个全新的对象
+- 这个新对象会被执行“原型”链接
+- 这个新对象会被绑定到调用的this
+- 如果函数没有对象类型的返回值，这个对象会被返回
+
+其中，第三步绑定了this,所以“构造函数”和原型中的this永远指向new出来的实例。
+
+## 优先级
+以上四条判断规则的权重是递增的。判断的顺序为：
+- 函数是new出来的，this指向实例
+- 函数通过call、apply、bind绑定过，this指向绑定的第一个参数
+- 函数在某个上下文对象中调用（隐式绑定），this指向上下文对象
+- 以上都不是，this指向全局对象
+
+## 严格模式下的差异
+以上所说的都是在非严格模式下成立，严格模式下的this指向是有差异的。
+- 独立函数调用： this 指向undefined
+- 对象上的方法： this 永远指向该对象
+- 其他没有区别
+
+## 箭头函数中的this
+箭头函数不是通过function关键字定义的，也不使用上面的this规则，而是“继承”外层作用域中的this指向。
+其实一起虽然没有箭头函数，我们也经常做和箭头函数一样效果的事情，比如说：
+```js
+	function foo() {
+	    var self = this; 
+	    setTimeout( function(){
+	        console.log( self );
+	    }, 100 );
+	}
+```
+## getter与setter中的this
+es6中的getter或setter函数都会把this绑定到设置或获取属性的对象上。
+```js
+	function sum() {
+	  return this.a + this.b + this.c;
+	}
+	var o = {
+	  a: 1,
+	  b: 2,
+	  c: 3,
+	  get average() {
+	    return (this.a + this.b + this.c) / 3;
+	  }
+	};
+	Object.defineProperty(o, 'sum', { get: sum, enumerable: true, configurable: true} );
+	console.log(o.average, o.sum); // logs 2, 6
+```
+
+
+
+
+
+
